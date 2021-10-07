@@ -8,11 +8,13 @@ import {
   Input,
 } from "@chakra-ui/react";
 import React from "react";
+import Navbar from "./Navbar";
 
 const Home = () => {
   // console.log(history);
   return (
     <>
+      <Navbar />
       <Box bg="gray.100">
         <Container
           bg="white"
@@ -28,6 +30,7 @@ const Home = () => {
                 h="70px"
                 fontSize="1.1rem"
                 focusBorderColor="tomato"
+                color="tomato"
               />
             </FormControl>
             <Box paddingTop="40px">

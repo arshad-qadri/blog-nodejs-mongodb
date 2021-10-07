@@ -3,17 +3,20 @@ import { Switch, Route } from "react-router-dom";
 import Home from "./components/Home";
 import About from "./components/About";
 import Contact from "./components/Contact";
-import Navbar from "./components/Navbar";
+// import Navbar from "./components/Navbar";
 import CreateBlog from "./components/CreateBlog";
+import Admin from "./admin/Admin";
 
 function App() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
         <Route exact path="/contact" component={Contact} />
+        <Route exact path="/admin" component={Admin} />
+
         <Route exact path="/create-blog" component={CreateBlog} />
       </Switch>
     </>
