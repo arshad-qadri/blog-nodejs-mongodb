@@ -5,6 +5,7 @@ import {
   UnorderedList,
   ListItem,
   Flex,
+  Button,
   FormControl,
   Input,
   Center,
@@ -80,36 +81,20 @@ const Navbar = () => {
                       fontWeight="500"
                       className="listItem"
                     >
-                      <NavLink to="/contact">Login</NavLink>
-                    </ListItem>
-                    <ListItem
-                      fontSize="1.3rem"
-                      fontWeight="500"
-                      className="listItem"
-                    >
-                      <Box display={{ lg: "block", md: "block", sm: "none" }}>
-                        <Box
+                      <NavLink to="/create-blog">
+                        <Button
                           bg="tomato"
-                          color="white"
-                          // colorScheme="tomato"
-                          className="btn"
-                          borderRadius="50%"
-                          w="40px"
-                          h="40px"
-                          shadow="xl"
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
+                          color="#fff"
+                          colorScheme="tomato"
+                          letterSpacing="1px"
                         >
-                          <FaSearch />
-                        </Box>
-                      </Box>
+                          Login
+                        </Button>
+                      </NavLink>
                     </ListItem>
                   </Flex>
                 </UnorderedList>
-                <Box
+                {/* <Box
                   display={{ lg: "none", md: "none", sm: "block" }}
                   // w={{ lg: "250px", md: "250px", sm: "100%" }}
                   width="100%"
@@ -145,7 +130,7 @@ const Navbar = () => {
                       </Center>
                     </Flex>
                   </FormControl>
-                </Box>
+                </Box> */}
               </div>
             </div>
             {/* ===================== toggler ===== */}

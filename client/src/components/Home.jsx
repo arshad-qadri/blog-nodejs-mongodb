@@ -21,7 +21,14 @@ const Home = () => {
         >
           <Box minH="91.6vh">
             <FormControl>
-              <Input type="text" placeholder="Search here..." />
+              <Input
+                type="text"
+                placeholder="Search here..."
+                w="100%"
+                h="70px"
+                fontSize="1.1rem"
+                focusBorderColor="tomato"
+              />
             </FormControl>
             <Box paddingTop="40px">
               <Heading as="h4" fontSize="1.7rem">
