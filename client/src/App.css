@@ -34,3 +34,13 @@
     display: none !important;
   }
 }
+
+@media only screen and (max-width: 420px) {
+  .login button {
+    padding: 0 30px !important;
+  }
+  .login .link {
+    flex-direction: column;
+    text-align: center;
+  }
+}

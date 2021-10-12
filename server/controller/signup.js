@@ -2,33 +2,43 @@ const { getJWTToken } = require("../jwt/jwt");
 const { sendMail } = require("../mail/sendMail");
 const db = require("../models");
 const signups = db.model;
+const { celebrate } = require("celebrate");
+const Joi = require("joi");
 
-exports.ceateAccount = async (req, res) => {
-  const user = await signups.findOne({ email: req.body.email });
+const createAccount = {
+  validator: celebrate({
+    body: Joi.object().keys({
+      fullname: Joi.string().required(),
+      email: Joi.string().email().required(),
+      password: Joi.string().min(6).required(),
+    }),
+  }),
+  controler: async (req, res) => {
+    const user = await signups.findOne({ email: req.body.email });
 
-  const signup = new signups({
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
-    email: req.body.email,
-    contact: req.body.contact,
-    password: req.body.password,
-  });
+    const signup = new signups({
+      fullname: req.body.fullname,
+      email: req.body.email,
+      password: req.body.password,
+      isAdmin: false,
+    });
 
-  if (user?.email === req.body.email) {
-    res.status(401).send({ message: "Email is already exist." });
-  } else {
-    signup
-      .save(signup)
-      .then(data => {
-        res.send({
-          data: data,
-          message: "Account created successfully.",
+    if (user?.email === req.body.email) {
+      res.status(401).send({ message: "Email is already exist." });
+    } else {
+      signup
+        .save(signup)
+        .then(data => {
+          res.send({
+            data: data,
+            message: "Account created successfully.",
+          });
+        })
+        .catch(err => {
+          res.status(500).send({ message: "Error", err });
         });
-      })
-      .catch(err => {
-        res.status(500).send({ message: "Error", err });
-      });
-  }
+    }
+  },
 };
 
 exports.login = async (req, res) => {
@@ -102,3 +112,5 @@ exports.changePassword = async (req, res) => {
       });
   }
 };
+
+export { createAccount };

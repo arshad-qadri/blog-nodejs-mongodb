@@ -81,7 +81,7 @@ const Navbar = () => {
                       fontWeight="500"
                       className="listItem"
                     >
-                      <NavLink to="/create-blog">
+                      <NavLink to="/login">
                         <Button
                           bg="tomato"
                           color="#fff"

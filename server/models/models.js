@@ -11,11 +11,11 @@ module.exports = mongoose => {
     "signup",
     mongoose.Schema(
       {
-        first_name: String,
-        last_name: String,
+        fullname: String,
         email: String,
-        contact: Number,
         password: String,
+        comment: String,
+        isAdmin: Boolean,
       },
       { timestamps: true }
     )
