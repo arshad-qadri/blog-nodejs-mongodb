@@ -3,7 +3,6 @@ import {
   Box,
   Container,
   Heading,
-  Text,
   FormControl,
   Button,
   Input,

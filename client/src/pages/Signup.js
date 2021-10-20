@@ -1,16 +1,50 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Container,
   Heading,
-  Text,
   FormControl,
   Button,
   Input,
+  useToast,
 } from "@chakra-ui/react";
+
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { account_create } from "../redux/actions/users/signup";
 
 const Signup = () => {
+  const toast = useToast();
+  const data = useSelector(state => state?.createAccount?.data?.data);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    console.log("eff data", data);
+  }, [data]);
+
+  const signupData = {
+    fullname: "",
+    email: "",
+    password: "",
+    confirm_password: "",
+  };
+  const [signup, setSignup] = useState(signupData);
+
+  const handleChange = e => {
+    setSignup({ ...signup, [e.target.name]: e.target.value });
+  };
+
+  const hadleSubmit = () => {
+    // if (data.validation) {
+    //   console.log("msg", data.validation);
+    // } else {
+    //   console.log("val", data.message);
+    // }
+    console.log("clicked");
+    console.log("data", data);
+
+    dispatch(account_create(signup));
+  };
+
   return (
     <>
       <Box bg="gray.100" w="100%" h="100vh" className="login">
@@ -34,32 +68,48 @@ const Signup = () => {
             p="20px"
           >
             <Input
+              id="fullname"
               type="text"
               placeholder="Enter your full name"
               marginTop="30px"
               h="50px"
               w="100%"
+              name="fullname"
+              value={signup.fullname}
+              onChange={e => handleChange(e)}
             />
             <Input
+              id="email"
               type="email"
               placeholder="Enter your email"
               marginTop="30px"
               h="50px"
               w="100%"
+              name="email"
+              value={signup.email}
+              onChange={e => handleChange(e)}
             />
             <Input
+              id="password"
               type="password"
               placeholder="Enter your password"
               marginTop="30px"
               h="50px"
               w="100%"
+              name="password"
+              value={signup.password}
+              onChange={e => handleChange(e)}
             />
             <Input
+              id="cpassword"
               type="password"
               placeholder="Enter your confirm password"
               marginTop="30px"
               h="50px"
               w="100%"
+              name="confirm_password"
+              value={signup.confirm_password}
+              onChange={e => handleChange(e)}
             />
             <Button
               marginTop="30px"
@@ -67,19 +117,20 @@ const Signup = () => {
               marginRight="0"
               bg="tomato"
               colorScheme="linkedin"
+              onClick={hadleSubmit}
             >
               Register
             </Button>
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              marginTop="20px"
-              color="blue.300"
-              className="link"
-            >
-              <Link to="/login">Already have an account?</Link>
-            </Box>
           </FormControl>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            marginTop="20px"
+            color="blue.300"
+            className="link"
+          >
+            <Link to="/login">Already have an account?</Link>
+          </Box>
         </Container>
       </Box>
     </>

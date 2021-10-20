@@ -5,8 +5,7 @@ import { Box, Heading } from "@chakra-ui/layout";
 import { MdOutlineLogout } from "react-icons/md";
 import { AiOutlinePlus } from "react-icons/ai";
 import { FaBars } from "react-icons/fa";
-import { Link, Switch, Route, BrowserRouter } from "react-router-dom";
-import CreateBlog from "../components/CreateBlog";
+import { Link } from "react-router-dom";
 
 const Admin = () => {
   return (

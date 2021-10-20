@@ -1,9 +1,16 @@
 const express = require("express");
 const app = express();
+const { errors } = require("celebrate");
+const cors = require("cors");
 
+const db = require("./models/index");
+const { setup } = require("./routes/index");
 app.use(express.json());
 
-const db = require("./models");
+var corsoptions = {
+  origin: "http://localhost:3000",
+};
+app.use(cors(corsoptions));
 db.mongoose
   .connect(db.url, {
     useNewUrlParser: true,
@@ -21,7 +28,9 @@ db.mongoose
 app.get("/", (req, res) => {
   res.send({ message: "welcome arshad" });
 });
-require("./routes/routes")(app);
+// require("./routes/routes")(app);
+setup(app);
+app.use(errors());
 
 const port = process.env.port || 5000;
 app.listen(port, () => {

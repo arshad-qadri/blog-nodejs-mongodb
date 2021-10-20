@@ -6,14 +6,11 @@ import {
   ListItem,
   Flex,
   Button,
-  FormControl,
-  Input,
-  Center,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
-import { GoSearch, GoThreeBars } from "react-icons/go";
-import { FaSearch } from "react-icons/fa";
+import { GoThreeBars } from "react-icons/go";
+
 const Navbar = () => {
   const [show, setShow] = useState("");
 
