@@ -15,10 +15,10 @@ import { account_create } from "../redux/actions/users/signup";
 
 const Signup = () => {
   const toast = useToast();
-  const data = useSelector(state => state?.createAccount?.data?.data);
+  const data = useSelector(state => state.createAccount);
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log("eff data", data);
+    // console.log("eff data", data);
   }, [data]);
 
   const signupData = {
@@ -39,10 +39,15 @@ const Signup = () => {
     // } else {
     //   console.log("val", data.message);
     // }
-    console.log("clicked");
-    console.log("data", data);
-
-    dispatch(account_create(signup));
+    if (data?.error) {
+      // console.log("clicked");
+      console.log("err");
+      console.log("eff data", data);
+    } else {
+      console.log("data", data);
+      console.log("clicked");
+      dispatch(account_create(signup));
+    }
   };
 
   return (

@@ -4,12 +4,15 @@ const initState = {
 };
 const success = (state, action) => {
   return {
-    data: action.payload,
+    ...state,
+    data: action.data,
   };
 };
 const failed = (state, action) => {
+  console.log(action);
   return {
-    data: action.payload,
+    ...state,
+    error: action.error,
   };
 };
 

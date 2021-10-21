@@ -10,13 +10,13 @@ import store from "./redux/store";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <ChakraProvider>
+    <BrowserRouter>
+      <ChakraProvider>
+        <Provider store={store}>
           <App />
-        </ChakraProvider>
-      </BrowserRouter>
-    </Provider>
+        </Provider>
+      </ChakraProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
 );
