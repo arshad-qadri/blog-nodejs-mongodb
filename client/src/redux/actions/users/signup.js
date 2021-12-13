@@ -1,21 +1,8 @@
 import axios from "axios";
-const accountCreatedSuccess = data => {
-  return {
-    type: "Account_Success",
-    data: data,
-  };
-};
-const accountCreatedFailed = err => {
-  return {
-    type: "Account_Failed",
-    error: err,
-  };
-};
-
-export const account_create = data => {
-  // console.log(data);
+import { ERROR, SIGN_UP } from "../type";
+export const Act_signup = data => {
   const { fullname, email, password } = data;
-  return disptch => {
+  return async dispatch => {
     axios
       .post("http://localhost:5000/api/create-account", {
         fullname: fullname,
@@ -24,10 +11,12 @@ export const account_create = data => {
         isAdmin: false,
       })
       .then(res => {
-        disptch(accountCreatedSuccess(res));
+        console.log("res", res);
+        dispatch({ type: SIGN_UP, payload: res.data });
       })
       .catch(err => {
-        disptch(accountCreatedFailed(err.response));
+        console.log("err", err);
+        dispatch({ type: ERROR, payload: err.response });
       });
   };
 };

@@ -15,7 +15,7 @@ const createAccount = {
     body: Joi.object().keys({
       fullname: Joi.string().required(),
       email: Joi.string().email().required(),
-      password: Joi.string().min(6).required(),
+      password: Joi.string().min(3).required(),
       isAdmin: Joi.boolean().required(),
     }),
   }),
@@ -37,7 +37,7 @@ const createAccount = {
         .save(signup)
         .then(data => {
           res.send({
-            data: data,
+            data,
             message: "Account created successfully.",
           });
         })

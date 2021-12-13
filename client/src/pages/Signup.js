@@ -8,48 +8,56 @@ import {
   Input,
   useToast,
 } from "@chakra-ui/react";
-
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { account_create } from "../redux/actions/users/signup";
+import { Link } from "react-router-dom";
+import { Act_signup } from "../redux/actions/users/signup";
 
 const Signup = () => {
-  const toast = useToast();
-  const data = useSelector(state => state.createAccount);
   const dispatch = useDispatch();
+  const data = useSelector(state => state.createAccount);
+  const toast = useToast();
   useEffect(() => {
-    // console.log("eff data", data);
+    console.log("data", data?.data?.message);
+    if (data?.data?.message) {
+      toast({
+        title: data?.data?.message,
+        // description: "We've created your account for you.",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+    } else if (data?.error?.data?.message) {
+      toast({
+        title: data?.error?.data?.message,
+        // description: "We've created your account for you.",
+        position: "top",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
   }, [data]);
-
   const signupData = {
     fullname: "",
     email: "",
     password: "",
     confirm_password: "",
   };
-  const [signup, setSignup] = useState(signupData);
+  const [signUp, setSignUp] = useState(signupData);
 
   const handleChange = e => {
-    setSignup({ ...signup, [e.target.name]: e.target.value });
+    setSignUp({ ...signUp, [e.target.name]: e.target.value });
   };
-
   const hadleSubmit = () => {
-    // if (data.validation) {
-    //   console.log("msg", data.validation);
-    // } else {
-    //   console.log("val", data.message);
-    // }
-    if (data?.error) {
-      // console.log("clicked");
-      console.log("err");
-      console.log("eff data", data);
-    } else {
-      console.log("data", data);
-      console.log("clicked");
-      dispatch(account_create(signup));
-    }
+    dispatch(Act_signup(signUp));
+    // toast({
+    //   title: data?.data?.message,
+    //   // description: "We've created your account for you.",
+    //   status: "success",
+    //   duration: 9000,
+    //   isClosable: true,
+    // });
   };
-
   return (
     <>
       <Box bg="gray.100" w="100%" h="100vh" className="login">
@@ -80,7 +88,7 @@ const Signup = () => {
               h="50px"
               w="100%"
               name="fullname"
-              value={signup.fullname}
+              value={signUp.fullname}
               onChange={e => handleChange(e)}
             />
             <Input
@@ -91,7 +99,7 @@ const Signup = () => {
               h="50px"
               w="100%"
               name="email"
-              value={signup.email}
+              value={signUp.email}
               onChange={e => handleChange(e)}
             />
             <Input
@@ -102,7 +110,7 @@ const Signup = () => {
               h="50px"
               w="100%"
               name="password"
-              value={signup.password}
+              value={signUp.password}
               onChange={e => handleChange(e)}
             />
             <Input
@@ -113,7 +121,7 @@ const Signup = () => {
               h="50px"
               w="100%"
               name="confirm_password"
-              value={signup.confirm_password}
+              value={signUp.confirm_password}
               onChange={e => handleChange(e)}
             />
             <Button
